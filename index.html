@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site avec Agent Jotform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5; /* Un fond léger pour voir le widget */
+            color: #333;
+        }
+
+        .content-area {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Jotform crée un élément avec l'ID 'JotformAgent-0197b67f34487441a8cdf228e75780add3e3'
+           Mais comme il est flottant (position: fixed), tu n'auras probablement pas besoin 
+           de lui donner de style CSS direct à moins de vouloir le positionner manuellement 
+           ou lui donner des dimensions spécifiques s'il n'est pas en mode flottant.
+           Dans ton script, 'isDraggable: false' et 'position: "right"' sont déjà définis.
+        */
+    </style>
+</head>
+<body>
+
+    <div class="content-area">
+        <h1>Bienvenue sur notre page !</h1>
+        <p>Explorez nos services et n'hésitez pas à nous contacter. L'agent d'aide devrait apparaître en bas à droite de l'écran.</p>
+        <p>Ceci est un exemple de contenu pour votre page.</p>
+    </div>
+
+    <div id="JotformAgent-0197b67f34487441a8cdf228e75780add3e3"></div>
+
+    <script src="https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            // Assure-toi que la variable AgentInitializer est disponible avant de l'appeler
+            if (window.AgentInitializer) {
+                window.AgentInitializer.init({
+                    rootId: "JotformAgent-0197b67f34487441a8cdf228e75780add3e3",
+                    formID: "0197b67f34487441a8cdf228e75780add3e3",
+                    queryParams: ["skipWelcome=1", "maximizable=1"],
+                    domain: "https:\/\/eu.jotform.com",
+                    isInitialOpen: false, // L'agent ne s'ouvre pas automatiquement au chargement
+                    isDraggable: false, // L'utilisateur ne peut pas le déplacer
+                    background: "linear-gradient(180deg, #6C73A8 0%, #6C73A8 100%)", // Couleur de fond du chat
+                    buttonBackgroundColor: "#0066C3", // Couleur du bouton flottant
+                    buttonIconColor: "#FFFFFF", // Couleur de l'icône du bouton
+                    variant: false, // Laisse à false sauf si Jotform te donne une valeur spécifique
+                    customizations: {
+                        greeting: "Yes",
+                        greetingMessage: "Hi! How can I assist you?",
+                        pulse: "Yes", // Fait pulser le bouton
+                        position: "right" // Positionne le bouton à droite
+                    }
+                });
+            } else {
+                console.error("Jotform AgentInitializer non trouvé. Le script n'a peut-être pas été chargé.");
+            }
+        });
+    </script>
+
+</body>
+</html>
